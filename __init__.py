@@ -22,7 +22,7 @@ class YoutubeControllerSkill(MycroftSkill):
         if time is None:
             self.speak_dialog('no.time')
             return
-        if (time == 'start')
+        if (time == 'start'):
             self.speak_dialog("Restarting the audio from the beginning")
             return
         unit = message.data.get("unit")
