@@ -1,5 +1,14 @@
 from mycroft import MycroftSkill, intent_handler
 
+def sox_fmt(seconds):
+    # sox format hh:mm:ss.frac
+    # h = int(seconds // 3600)
+    # m = int((seconds // 60) % 60)
+    # s = seconds % 60
+    out = '{:02d}:{:02d}:{:f}'.format(int(seconds // 3600),
+                                      int((seconds // 60) % 60), 
+                                      seconds % 60) 
+    return out
 
 class YoutubeControllerSkill(MycroftSkill):
     def __init__(self):
@@ -36,16 +45,6 @@ class YoutubeControllerSkill(MycroftSkill):
             return
         resp = {'time': time, 'unit' : unit}
         self.speak_dialog('rewind.confirm', data=resp)
-
-    def sox_fmt(seconds):
-        # sox format hh:mm:ss.frac
-        # h = int(seconds // 3600)
-        # m = int((seconds // 60) % 60)
-        # s = seconds % 60
-        out = '{:02d}:{:02d}:{:f}'.format(int(seconds // 3600),
-                                          int((seconds // 60) % 60), 
-                                          seconds % 60) 
-        return out
 
     def play(self, file1, start=0, stop=0):
         '''Play a portion of a file given start and
