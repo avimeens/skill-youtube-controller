@@ -2,6 +2,7 @@ from __future__ import division
 from mycroft import MycroftSkill, intent_handler
 from subprocess import Popen
 from monotonic import monotonic
+from time import sleep
 import sys
 
 
@@ -33,8 +34,9 @@ class YoutubeControllerSkill(MycroftSkill):
             return
         resp = {'query': query}
         self.speak_dialog('search.confirm', data=resp)
+        sleep(3)
         # download the file first
-        self.play("air-filter.wav")
+        self.play("/opt/mycroft/skills/skill-youtube-controller/air-filter.wav")
 
     def handle_rewind(self, message):
         time = messge.data.get("time")
@@ -50,6 +52,8 @@ class YoutubeControllerSkill(MycroftSkill):
             return
         resp = {'time': time, 'unit' : unit}
         self.speak_dialog('rewind.confirm', data=resp)
+        sleep(3)
+        self.jump(unit)
 
     def play(self, file1, start=0, stop=0):
         '''Play a portion of a file given start and
