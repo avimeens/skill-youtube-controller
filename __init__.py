@@ -39,7 +39,7 @@ class YoutubeControllerSkill(MycroftSkill):
         self.play("/opt/mycroft/skills/skill-youtube-controller/air-filter.wav")
 
     def handle_rewind(self, message):
-        time = messge.data.get("time")
+        time = message.data.get("time")
         if time is None:
             self.speak_dialog('no.time')
             return
